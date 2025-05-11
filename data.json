@@ -1,1 +1,28 @@
 
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Smartphone Premium",
+      "price": 2499.99,
+      "description": "O mais recente smartphone com câmera de 108MP.",
+      "image_url": "https://exemplo.com/img/smartphone.jpg ",
+      "purchase_link": "https://exemplo.com/comprar/smartphone "
+    },
+    {
+      "id": 2,
+      "name": "Notebook Pro",
+      "price": 5299.90,
+      "description": "Notebook com tela 4K, 16GB RAM.",
+      "image_url": "https://exemplo.com/img/notebook.jpg ",
+      "purchase_link": "https://exemplo.com/comprar/notebook "
+    }
+  ]
+}
