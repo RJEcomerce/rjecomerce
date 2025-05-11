@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com "></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css "/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js "></script>
     <style>
         .product-card:hover {
             transform: translateY(-5px);
@@ -53,9 +52,6 @@
         .dark-bg {
             background-color: #121212;
         }
-        .dark-text {
-            color: #1E1E1E;
-        }
         .table-header {
             background-color: #1E1E1E;
             color: #D4AF37;
@@ -65,17 +61,17 @@
         }
     </style>
 </head>
-<body class="bg-dark-800 text-white">
+<body class="bg-gray-900 text-white">
     <!-- Navigation -->
-    <nav class="bg-dark-900 text-gold-500 shadow-lg border-b border-gold-500">
+    <nav class="bg-black text-gold-500 shadow-lg border-b border-gold-500">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold flex items-center">
                 <i class="fas fa-crown mr-2"></i>
                 Super Vendas
             </a>
-            <div class="flex items-center space-x-4">
+            <div class="flex space-x-4">
                 <a href="#" id="shop-link" class="hover:text-gold-600">Loja</a>
-                <a href="#" id="admin-link" class="hover:text-gold-600 hidden">Admin</a>
+                <a href="#" id="admin-link" class="hidden hover:text-gold-600">Admin</a>
                 <a href="#" id="login-link" class="hover:text-gold-600">Login</a>
             </div>
         </div>
@@ -86,11 +82,6 @@
         <!-- Shop Page -->
         <div id="shop-page">
             <h1 class="text-3xl font-bold mb-8 text-center gold-text">Nossos Produtos</h1>
-            <div class="mb-6 flex justify-center">
-                <select id="category-filter" class="bg-dark-700 text-white p-2 rounded border border-gold-500">
-                    <option value="">Todas as Categorias</option>
-                </select>
-            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Product cards will be loaded here dynamically -->
             </div>
@@ -102,11 +93,11 @@
             <form id="login-form">
                 <div class="mb-4">
                     <label for="username" class="block gold-text mb-2">Usuário</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-700 border-gold-500 text-white" required>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-800 border-gold-500 text-white" required>
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block gold-text mb-2">Senha</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-700 border-gold-500 text-white" required>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-800 border-gold-500 text-white" required>
                 </div>
                 <button type="submit" class="w-full gold-bg hover:bg-gold-600 text-dark-900 py-2 px-4 rounded-lg font-medium transition duration-300">
                     Entrar
@@ -126,20 +117,18 @@
                         <i class="fas fa-user-shield mr-2"></i> Painel Admin
                     </h2>
                     <ul class="space-y-2">
-                        <li><a href="#" id="admin-products" class="block py-2 px-4 rounded hover:bg-dark-700 bg-dark-700 border border-gold-500"><i class="fas fa-box-open mr-2"></i>Produtos</a></li>
-                        <li><a href="#" id="admin-add-product" class="block py-2 px-4 rounded hover:bg-dark-700 border border-gold-500"><i class="fas fa-plus-circle mr-2"></i>Adicionar Produto</a></li>
-                        <li><a href="#" id="admin-change-password" class="block py-2 px-4 rounded hover:bg-dark-700 border border-gold-500"><i class="fas fa-key mr-2"></i>Alterar Senha</a></li>
-                        <li><a href="#" id="admin-logout" class="block py-2 px-4 rounded hover:bg-dark-700 border border-gold-500"><i class="fas fa-sign-out-alt mr-2"></i>Sair</a></li>
+                        <li><a href="#" id="admin-products" class="block py-2 px-4 rounded hover:bg-gray-800 bg-gray-800 border border-gold-500"><i class="fas fa-box-open mr-2"></i>Produtos</a></li>
+                        <li><a href="#" id="admin-add-product" class="block py-2 px-4 rounded hover:bg-gray-800 border border-gold-500"><i class="fas fa-plus-circle mr-2"></i>Adicionar Produto</a></li>
+                        <li><a href="#" id="admin-change-password" class="block py-2 px-4 rounded hover:bg-gray-800 border border-gold-500"><i class="fas fa-key mr-2"></i>Alterar Senha</a></li>
+                        <li><a href="#" id="admin-logout" class="block py-2 px-4 rounded hover:bg-gray-800 border border-gold-500"><i class="fas fa-sign-out-alt mr-2"></i>Sair</a></li>
                     </ul>
                 </div>
 
                 <!-- Admin Content -->
-                <div class="flex-1 p-8 bg-dark-800">
+                <div class="flex-1 p-8 bg-gray-900">
                     <!-- Products List -->
                     <div id="admin-products-content">
-                        <div class="flex justify-between items-center mb-8">
-                            <h2 class="text-2xl font-bold gold-text">Gerenciar Produtos</h2>
-                        </div>
+                        <h2 class="text-2xl font-bold gold-text mb-6">Gerenciar Produtos</h2>
                         <div class="rounded-lg shadow overflow-hidden border border-gold-500">
                             <table class="min-w-full divide-y divide-gold-500">
                                 <thead class="table-header">
@@ -147,107 +136,71 @@
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Imagem</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nome</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Preço</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Categoria</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Link</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody id="admin-products-list" class="bg-dark-700 divide-y divide-gold-500"></tbody>
+                                <tbody id="admin-products-list" class="bg-gray-800 divide-y divide-gold-500"></tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- Add Product Form -->
+                    <!-- Add/Edit Product Form -->
                     <div id="admin-add-product-content" class="hidden">
-                        <div class="flex justify-between items-center mb-8">
-                            <h2 class="text-2xl font-bold gold-text" id="add-edit-title">Adicionar Novo Produto</h2>
-                        </div>
-                        <form id="add-product-form" class="bg-dark-700 p-6 rounded-lg shadow border border-gold-500">
+                        <h2 class="text-2xl font-bold gold-text mb-6">Adicionar / Editar Produto</h2>
+                        <form id="add-product-form" class="bg-gray-800 p-6 rounded-lg shadow border border-gold-500">
                             <input type="hidden" id="product-id">
                             <div class="mb-4">
                                 <label for="product-name" class="block gold-text mb-2">Nome do Produto</label>
-                                <input type="text" id="product-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
+                                <input type="text" id="product-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
                             </div>
                             <div class="mb-4">
                                 <label for="product-price" class="block gold-text mb-2">Preço</label>
-                                <input type="number" step="0.01" id="product-price" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
+                                <input type="number" step="0.01" id="product-price" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
                             </div>
                             <div class="mb-4">
                                 <label for="product-description" class="block gold-text mb-2">Descrição</label>
-                                <textarea id="product-description" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required></textarea>
+                                <textarea id="product-description" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required></textarea>
                             </div>
                             <div class="mb-4">
                                 <label for="product-image" class="block gold-text mb-2">URL da Imagem</label>
-                                <input type="url" id="product-image" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
+                                <input type="url" id="product-image" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
                             </div>
-                            <div class="mb-4">
-                                <label for="product-category" class="block gold-text mb-2">Categoria</label>
-                                <select id="product-category" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
-                                    <!-- Categories will be filled dynamically -->
-                                </select>
-                            </div>
-                            <div class="mb-4">
+                            <div class="mb-6">
                                 <label for="product-link" class="block gold-text mb-2">Link de Compra</label>
-                                <input type="url" id="product-link" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
+                                <input type="url" id="product-link" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
                             </div>
                             <div class="flex justify-end space-x-4">
-                                <button type="button" id="cancel-add-product" class="px-4 py-2 border border-gold-500 rounded-lg text-gold-500 hover:bg-dark-600">Cancelar</button>
-                                <button type="submit" class="px-4 py-2 gold-bg text-dark-900 rounded-lg hover:bg-gold-600">Salvar Produto</button>
+                                <button type="button" id="cancel-add-product" class="px-4 py-2 border border-gold-500 rounded-lg text-gold-500 hover:bg-gray-700">Cancelar</button>
+                                <button type="submit" class="px-4 py-2 gold-bg hover:bg-gold-600 text-dark-900 rounded-lg">Salvar Produto</button>
                             </div>
                         </form>
                     </div>
 
                     <!-- Change Password Form -->
-                    <div id="admin-change-password-content" class="hidden max-w-lg mx-auto">
-                        <div class="flex justify-between items-center mb-8">
-                            <h2 class="text-2xl font-bold gold-text">Alterar Senha</h2>
-                        </div>
-                        <form id="change-password-form" class="bg-dark-700 p-6 rounded-lg shadow border border-gold-500">
+                    <div id="admin-change-password-content" class="hidden">
+                        <h2 class="text-2xl font-bold gold-text mb-6">Alterar Senha</h2>
+                        <form id="change-password-form" class="bg-gray-800 p-6 rounded-lg shadow border border-gold-500">
                             <div class="mb-4">
                                 <label for="current-password" class="block gold-text mb-2">Senha Atual</label>
-                                <div class="relative">
-                                    <input type="password" id="current-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
-                                    <button type="button" class="absolute right-3 top-3 text-gold-500 hover:text-gold-600 toggle-password" data-target="current-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
+                                <input type="password" id="current-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
                             </div>
                             <div class="mb-4">
                                 <label for="new-password" class="block gold-text mb-2">Nova Senha</label>
-                                <div class="relative">
-                                    <input type="password" id="new-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
-                                    <button type="button" class="absolute right-3 top-3 text-gold-500 hover:text-gold-600 toggle-password" data-target="new-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                                <div class="password-strength strength-0" id="password-strength"></div>
-                                <div class="text-xs text-gold-500 mt-1" id="password-hints">
-                                    A senha deve conter pelo menos 8 caracteres, incluindo maiúsculas, minúsculas, números e caracteres especiais.
-                                </div>
+                                <input type="password" id="new-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
+                                <div class="password-strength strength-0 mt-1" id="password-strength"></div>
+                                <small class="text-gold-500 mt-1 block">A senha deve conter pelo menos 8 caracteres, incluindo maiúsculas, minúsculas, números e caracteres especiais.</small>
                             </div>
                             <div class="mb-6">
                                 <label for="confirm-password" class="block gold-text mb-2">Confirmar Nova Senha</label>
-                                <div class="relative">
-                                    <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-dark-800 border-gold-500 text-white" required>
-                                    <button type="button" class="absolute right-3 top-3 text-gold-500 hover:text-gold-600 toggle-password" data-target="confirm-password">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                                <div class="text-xs text-red-500 mt-1 hidden" id="password-mismatch">
-                                    As senhas não coincidem.
-                                </div>
+                                <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-gray-700 border-gold-500 text-white" required>
+                                <small class="text-red-500 mt-1 block hidden" id="password-mismatch">As senhas não coincidem.</small>
                             </div>
                             <div class="flex justify-end space-x-4">
-                                <button type="button" id="cancel-change-password" class="px-4 py-2 border border-gold-500 rounded-lg text-gold-500 hover:bg-dark-600">Cancelar</button>
-                                <button type="submit" class="px-4 py-2 gold-bg text-dark-900 rounded-lg hover:bg-gold-600">Alterar Senha</button>
+                                <button type="button" id="cancel-change-password" class="px-4 py-2 border border-gold-500 rounded-lg text-gold-500 hover:bg-gray-700">Cancelar</button>
+                                <button type="submit" class="px-4 py-2 gold-bg hover:bg-gold-600 text-dark-900 rounded-lg">Alterar Senha</button>
                             </div>
                         </form>
-                        <div id="password-change-success" class="mt-4 p-4 bg-green-900 text-green-300 rounded-lg border border-green-500 hidden">
-                            <i class="fas fa-check-circle mr-2"></i> Senha alterada com sucesso!
-                        </div>
-                        <div id="password-change-error" class="mt-4 p-4 bg-red-900 text-red-300 rounded-lg border border-red-500 hidden">
-                            <i class="fas fa-exclamation-circle mr-2"></i> <span id="error-message"></span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -256,345 +209,133 @@
 
     <!-- JavaScript -->
     <script>
-        let db;
+        let db = {
+            users: [],
+            products: []
+        };
         let isAuthenticated = false;
         let currentUser = null;
 
-        async function initDatabase() {
+        const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/data.json ';
+
+        // Carregar dados do JSON
+        async function loadDatabase() {
             try {
-                const SQL = await initSqlJs({
-                    locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/ ${file}`
-                });
-                db = new SQL.Database();
-
-                // Criar tabelas
-                db.run(`
-                    CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT UNIQUE NOT NULL,
-                        password_hash TEXT NOT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );
-                `);
-
-                db.run(`
-                    CREATE TABLE IF NOT EXISTS categories (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT UNIQUE NOT NULL
-                    );
-                `);
-
-                db.run(`
-                    CREATE TABLE IF NOT EXISTS products (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        price REAL NOT NULL,
-                        description TEXT NOT NULL,
-                        image_url TEXT NOT NULL,
-                        purchase_link TEXT NOT NULL,
-                        category_id INTEGER REFERENCES categories(id),
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );
-                `);
-
-                // Inserir usuário padrão
-                const userCheck = db.exec("SELECT COUNT(*) as count FROM users");
-                if (userCheck[0].values[0][0] === 0) {
-                    const defaultPasswordHash = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
-                    db.run("INSERT INTO users (username, password_hash) VALUES (?, ?)", ["admin", defaultPasswordHash]);
-
-                    // Inserir algumas categorias
-                    const categories = ['Eletrônicos', 'Roupas', 'Livros', 'Móveis'];
-                    categories.forEach(cat => {
-                        db.run("INSERT INTO categories (name) VALUES (?)", [cat]);
-                    });
-
-                    // Inserir alguns produtos
-                    const catId = db.exec("SELECT id FROM categories WHERE name = 'Eletrônicos'")[0].values[0][0];
-                    db.run(`INSERT INTO products (name, price, description, image_url, purchase_link, category_id)
-                            VALUES ('Smartphone Premium', 2499.99, 'O mais recente smartphone com câmera de 108MP.', 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60 ', 'https://exemplo.com/comprar/smartphone ', ?)`, [catId]);
+                const savedDb = localStorage.getItem('localDB');
+                if (savedDb) {
+                    db = JSON.parse(savedDb);
+                } else {
+                    const res = await fetch(GITHUB_JSON_URL);
+                    db = await res.json();
                 }
-
-                console.log("Banco inicializado com sucesso.");
+                console.log("Banco carregado com sucesso!");
             } catch (err) {
                 alert("Erro ao carregar o banco de dados.");
                 console.error(err);
             }
         }
 
-        // Funções auxiliares do banco de dados
-        function getProducts(categoryId = null) {
-            let query = `
-                SELECT p.id, p.name, p.price, p.description, p.image_url, p.purchase_link, c.name AS category_name 
-                FROM products p
-                LEFT JOIN categories c ON p.category_id = c.id
-            `;
-            if (categoryId) {
-                query += ` WHERE p.category_id = ${parseInt(categoryId)}`;
-            }
-            const stmt = db.prepare(query);
-            const results = [];
-            while (stmt.step()) {
-                results.push(stmt.getAsObject());
-            }
-            return results;
+        // Salvar dados no localStorage
+        function saveDatabase() {
+            localStorage.setItem('localDB', JSON.stringify(db));
         }
 
-        function getCategories() {
-            const stmt = db.prepare("SELECT * FROM categories ORDER BY name");
-            const results = [];
-            while (stmt.step()) {
-                results.push(stmt.getAsObject());
-            }
-            return results;
+        // Renderizar produtos na loja
+        function renderProducts() {
+            const container = document.querySelector("#shop-page .grid");
+            container.innerHTML = "";
+            db.products.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gold-500";
+                card.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold gold-text">${product.name}</h3>
+                        <p class="text-gray-300 mb-4">${product.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl gold-text">R$ ${parseFloat(product.price).toFixed(2)}</span>
+                            <a href="${product.purchase_link}" target="_blank" class="px-4 py-2 gold-bg text-dark-900 rounded-lg">Comprar</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
-        function getCategoryById(id) {
-            const stmt = db.prepare("SELECT * FROM categories WHERE id = ?");
-            stmt.bind([id]);
-            const result = stmt.step() ? stmt.getAsObject() : null;
-            stmt.free();
-            return result;
+        // Renderizar lista de produtos no painel admin
+        function renderAdminProducts() {
+            const tbody = document.getElementById("admin-products-list");
+            tbody.innerHTML = "";
+            db.products.forEach(product => {
+                const tr = document.createElement("tr");
+                tr.className = "table-row";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <img src="${product.image_url}" alt="${product.name}" class="h-10 w-10 rounded-full">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">${product.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm gold-text">R$ ${parseFloat(product.price).toFixed(2)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 truncate max-w-xs">${product.purchase_link}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                        <button onclick="editProduct(${product.id})" class="gold-text hover:text-gold-600 mr-3">Editar</button>
+                        <button onclick="deleteProduct(${product.id})" class="text-red-400 hover:text-red-600">Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Funções CRUD
+        function getProductById(id) {
+            return db.products.find(p => p.id === id);
         }
 
         function addProduct(product) {
-            const stmt = db.prepare(`
-                INSERT INTO products (name, price, description, image_url, purchase_link, category_id)
-                VALUES (?, ?, ?, ?, ?, ?)
-            `);
-            stmt.bind([
-                product.name,
-                product.price,
-                product.description,
-                product.image_url,
-                product.purchase_link,
-                product.category_id || null
-            ]);
-            stmt.step();
-            stmt.free();
-            return db.exec("SELECT last_insert_rowid()")[0].values[0][0];
+            product.id = db.products.length ? Math.max(...db.products.map(p => p.id)) + 1 : 1;
+            db.products.push(product);
+            saveDatabase();
         }
 
         function updateProduct(product) {
-            const stmt = db.prepare(`
-                UPDATE products SET
-                    name = ?, price = ?, description = ?, image_url = ?, purchase_link = ?, category_id = ?
-                WHERE id = ?
-            `);
-            stmt.bind([
-                product.name,
-                product.price,
-                product.description,
-                product.image_url,
-                product.purchase_link,
-                product.category_id || null,
-                product.id
-            ]);
-            stmt.step();
-            stmt.free();
+            const idx = db.products.findIndex(p => p.id === product.id);
+            if (idx > -1) {
+                db.products[idx] = product;
+                saveDatabase();
+            }
         }
 
-        function deleteProductById(id) {
-            const stmt = db.prepare("DELETE FROM products WHERE id = ?");
-            stmt.bind([id]);
-            stmt.step();
-            stmt.free();
-        }
-
-        function getProductById(id) {
-            const stmt = db.prepare("SELECT * FROM products WHERE id = ?");
-            stmt.bind([id]);
-            const result = stmt.step() ? stmt.getAsObject() : null;
-            stmt.free();
-            return result;
-        }
-
-        function getUserByUsername(username) {
-            const stmt = db.prepare("SELECT * FROM users WHERE username = ?");
-            stmt.bind([username]);
-            const result = stmt.step() ? stmt.getAsObject() : null;
-            stmt.free();
-            return result;
-        }
-
-        function updateUserPassword(userId, newPasswordHash) {
-            const stmt = db.prepare("UPDATE users SET password_hash = ? WHERE id = ?");
-            stmt.bind([newPasswordHash, userId]);
-            stmt.step();
-            stmt.free();
-        }
-
-        // DOM Elements
-        const shopPage = document.getElementById('shop-page');
-        const loginPage = document.getElementById('login-page');
-        const adminPage = document.getElementById('admin-page');
-        const adminLink = document.getElementById('admin-link');
-        const loginLink = document.getElementById('login-link');
-        const shopLink = document.getElementById('shop-link');
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
-
-        const adminProductsContent = document.getElementById('admin-products-content');
-        const adminAddProductContent = document.getElementById('admin-add-product-content');
-        const adminChangePasswordContent = document.getElementById('admin-change-password-content');
-
-        const adminProductsLink = document.getElementById('admin-products');
-        const adminAddProductLink = document.getElementById('admin-add-product');
-        const adminChangePasswordLink = document.getElementById('admin-change-password');
-        const adminLogoutLink = document.getElementById('admin-logout');
-
-        const cancelAddProductBtn = document.getElementById('cancel-add-product');
-        const cancelChangePasswordBtn = document.getElementById('cancel-change-password');
-
-        const addProductForm = document.getElementById('add-product-form');
-        const changePasswordForm = document.getElementById('change-password-form');
-
-        const addEditTitle = document.getElementById('add-edit-title');
-        const passwordStrength = document.getElementById('password-strength');
-        const passwordMismatch = document.getElementById('password-mismatch');
-        const passwordChangeSuccess = document.getElementById('password-change-success');
-        const passwordChangeError = document.getElementById('password-change-error');
-        const errorMessage = document.getElementById('error-message');
-
-        const categoryFilter = document.getElementById('category-filter');
-        const categorySelect = document.getElementById('product-category');
-
-        async function init() {
-            await initDatabase();
-            setupEventListeners();
-            loadCategoriesToFilter();
+        function deleteProduct(id) {
+            db.products = db.products.filter(p => p.id !== id);
+            saveDatabase();
+            renderAdminProducts();
             renderProducts();
         }
 
-        function setupEventListeners() {
-            // Navegação
-            loginLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showLoginPage();
-            });
-            shopLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showShopPage();
-            });
-            adminLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAdminPage();
-            });
-
-            // Login
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const hashedPassword = sha256(password);
-                const user = getUserByUsername(username);
-                if (user && user.password_hash === hashedPassword) {
-                    isAuthenticated = true;
-                    currentUser = user;
-                    adminLink.classList.remove('hidden');
-                    showAdminPage();
-                    loginError.classList.add('hidden');
-                } else {
-                    loginError.classList.remove('hidden');
-                }
-            });
-
-            // Admin nav
-            adminProductsLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAdminProducts();
-            });
-            adminAddProductLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAddProductForm();
-            });
-            adminChangePasswordLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showChangePasswordForm();
-            });
-            adminLogoutLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                logout();
-            });
-
-            // Cancelar
-            cancelAddProductBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAdminProducts();
-            });
-            cancelChangePasswordBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showAdminProducts();
-            });
-
-            // Salvar produto
-            addProductForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const productId = document.getElementById('product-id').value;
-                if (productId) {
-                    updateProductInDB(productId);
-                } else {
-                    addNewProductToDB();
-                }
-            });
-
-            // Alterar senha
-            changePasswordForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                changePasswordInDB();
-            });
-
-            // Força da senha
-            document.getElementById('new-password').addEventListener('input', (e) => {
-                checkPasswordStrength(e.target.value);
-            });
-
-            // Confirmar senha
-            document.getElementById('confirm-password').addEventListener('input', (e) => {
-                const newPassword = document.getElementById('new-password').value;
-                const confirmPassword = e.target.value;
-                if (newPassword && confirmPassword && newPassword !== confirmPassword) {
-                    passwordMismatch.classList.remove('hidden');
-                } else {
-                    passwordMismatch.classList.add('hidden');
-                }
-            });
-
-            // Mostrar/esconder senha
-            document.querySelectorAll('.toggle-password').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const targetId = e.target.closest('button').getAttribute('data-target');
-                    const input = document.getElementById(targetId);
-                    const icon = e.target.closest('button').querySelector('i');
-                    if (input.type === 'password') {
-                        input.type = 'text';
-                        icon.classList.replace('fa-eye', 'fa-eye-slash');
-                    } else {
-                        input.type = 'password';
-                        icon.classList.replace('fa-eye-slash', 'fa-eye');
-                    }
-                });
-            });
-
-            // Filtrar por categoria
-            categoryFilter.addEventListener('change', () => {
-                renderProducts(categoryFilter.value);
-            });
+        // Funções auxiliares
+        function getUserByUsername(username) {
+            return db.users.find(u => u.username === username);
         }
 
+        function updateUserPassword(userId, newPasswordHash) {
+            const user = db.users.find(u => u.id === userId);
+            if (user) {
+                user.password_hash = newPasswordHash;
+                saveDatabase();
+            }
+        }
+
+        // Navegação entre páginas
         function showShopPage() {
-            shopPage.classList.remove('hidden');
-            loginPage.classList.add('hidden');
-            adminPage.classList.add('hidden');
+            document.getElementById("shop-page").classList.remove("hidden");
+            document.getElementById("login-page").classList.add("hidden");
+            document.getElementById("admin-page").classList.add("hidden");
             renderProducts();
         }
 
         function showLoginPage() {
-            shopPage.classList.add('hidden');
-            loginPage.classList.remove('hidden');
-            adminPage.classList.add('hidden');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
+            document.getElementById("shop-page").classList.add("hidden");
+            document.getElementById("login-page").classList.remove("hidden");
+            document.getElementById("admin-page").classList.add("hidden");
         }
 
         function showAdminPage() {
@@ -602,259 +343,191 @@
                 showLoginPage();
                 return;
             }
-            shopPage.classList.add('hidden');
-            loginPage.classList.add('hidden');
-            adminPage.classList.remove('hidden');
+            document.getElementById("shop-page").classList.add("hidden");
+            document.getElementById("login-page").classList.add("hidden");
+            document.getElementById("admin-page").classList.remove("hidden");
             showAdminProducts();
         }
 
         function showAdminProducts() {
-            adminProductsContent.classList.remove('hidden');
-            adminAddProductContent.classList.add('hidden');
-            adminChangePasswordContent.classList.add('hidden');
-            adminProductsLink.classList.add('bg-dark-700');
-            adminAddProductLink.classList.removeClass('bg-dark-700');
-            adminChangePasswordLink.classList.removeClass('bg-dark-700');
-            loadCategoriesToForm();
+            document.getElementById("admin-products-content").classList.remove("hidden");
+            document.getElementById("admin-add-product-content").classList.add("hidden");
+            document.getElementById("admin-change-password-content").classList.add("hidden");
             renderAdminProducts();
         }
 
-        function showAddProductForm() {
-            adminProductsContent.classList.add('hidden');
-            adminAddProductContent.classList.remove('hidden');
-            adminChangePasswordContent.classList.add('hidden');
-            adminProductsLink.classList.removeClass('bg-dark-700');
-            adminAddProductLink.classList.add('bg-dark-700');
-            adminChangePasswordLink.classList.removeClass('bg-dark-700');
-            loadCategoriesToForm();
-            addProductForm.reset();
-            document.getElementById('product-id').value = '';
-            addEditTitle.textContent = 'Adicionar Novo Produto';
+        function showAddProductForm(product = null) {
+            document.getElementById("admin-products-content").classList.add("hidden");
+            document.getElementById("admin-add-product-content").classList.remove("hidden");
+            document.getElementById("admin-change-password-content").classList.add("hidden");
+
+            if (product) {
+                document.getElementById("product-id").value = product.id;
+                document.getElementById("product-name").value = product.name;
+                document.getElementById("product-price").value = product.price;
+                document.getElementById("product-description").value = product.description;
+                document.getElementById("product-image").value = product.image_url;
+                document.getElementById("product-link").value = product.purchase_link;
+            } else {
+                document.getElementById("add-product-form").reset();
+                document.getElementById("product-id").value = "";
+            }
         }
 
         function showChangePasswordForm() {
-            adminProductsContent.classList.add('hidden');
-            adminAddProductContent.classList.add('hidden');
-            adminChangePasswordContent.classList.remove('hidden');
-            adminProductsLink.classList.removeClass('bg-dark-700');
-            adminAddProductLink.classList.removeClass('bg-dark-700');
-            adminChangePasswordLink.classList.add('bg-dark-700');
-            changePasswordForm.reset();
-            passwordStrength.className = 'password-strength strength-0';
-            passwordMismatch.classList.add('hidden');
-            passwordChangeSuccess.classList.add('hidden');
-            passwordChangeError.classList.add('hidden');
+            document.getElementById("admin-products-content").classList.add("hidden");
+            document.getElementById("admin-add-product-content").classList.add("hidden");
+            document.getElementById("admin-change-password-content").classList.remove("hidden");
         }
 
-        function showEditProductForm(product) {
-            adminProductsContent.classList.add('hidden');
-            adminAddProductContent.classList.remove('hidden');
-            adminChangePasswordContent.classList.add('hidden');
-            adminProductsLink.classList.removeClass('bg-dark-700');
-            adminAddProductLink.classList.add('bg-dark-700');
-            adminChangePasswordLink.classList.removeClass('bg-dark-700');
-            loadCategoriesToForm();
-            document.getElementById('product-id').value = product.id;
-            document.getElementById('product-name').value = product.name;
-            document.getElementById('product-price').value = product.price;
-            document.getElementById('product-description').value = product.description;
-            document.getElementById('product-image').value = product.image_url;
-            document.getElementById('product-link').value = product.purchase_link;
-            document.getElementById('product-category').value = product.category_id || '';
-            addEditTitle.textContent = 'Editar Produto';
+        // Event listeners
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("login-link").addEventListener("click", (e) => {
+                e.preventDefault();
+                showLoginPage();
+            });
+
+            document.getElementById("shop-link").addEventListener("click", (e) => {
+                e.preventDefault();
+                showShopPage();
+            });
+
+            document.getElementById("admin-link").addEventListener("click", (e) => {
+                e.preventDefault();
+                showAdminPage();
+            });
+
+            document.getElementById("login-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                const hashed = sha256(password);
+                const user = getUserByUsername(username);
+
+                if (user && user.password_hash === hashed) {
+                    isAuthenticated = true;
+                    currentUser = user;
+                    document.getElementById("admin-link").classList.remove("hidden");
+                    showAdminPage();
+                    document.getElementById("login-error").classList.add("hidden");
+                } else {
+                    document.getElementById("login-error").classList.remove("hidden");
+                }
+            });
+
+            document.getElementById("admin-products").addEventListener("click", (e) => {
+                e.preventDefault();
+                showAdminProducts();
+            });
+
+            document.getElementById("admin-add-product").addEventListener("click", (e) => {
+                e.preventDefault();
+                showAddProductForm();
+            });
+
+            document.getElementById("admin-change-password").addEventListener("click", (e) => {
+                e.preventDefault();
+                showChangePasswordForm();
+            });
+
+            document.getElementById("admin-logout").addEventListener("click", (e) => {
+                e.preventDefault();
+                logout();
+            });
+
+            document.getElementById("add-product-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const id = parseInt(document.getElementById("product-id").value);
+                const product = {
+                    name: document.getElementById("product-name").value,
+                    price: parseFloat(document.getElementById("product-price").value),
+                    description: document.getElementById("product-description").value,
+                    image_url: document.getElementById("product-image").value,
+                    purchase_link: document.getElementById("product-link").value
+                };
+
+                if (id) {
+                    product.id = id;
+                    updateProduct(product);
+                } else {
+                    addProduct(product);
+                }
+
+                alert("Produto salvo com sucesso!");
+                showAdminProducts();
+            });
+
+            document.getElementById("change-password-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const current = document.getElementById("current-password").value;
+                const newPass = document.getElementById("new-password").value;
+                const confirm = document.getElementById("confirm-password").value;
+
+                const hashedCurrent = sha256(current);
+
+                if (hashedCurrent !== currentUser.password_hash) {
+                    alert("Senha atual incorreta.");
+                    return;
+                }
+
+                if (newPass.length < 8) {
+                    alert("Senha deve ter no mínimo 8 caracteres.");
+                    return;
+                }
+
+                if (newPass !== confirm) {
+                    document.getElementById("password-mismatch").classList.remove("hidden");
+                    return;
+                }
+
+                const hashedNew = sha256(newPass);
+                updateUserPassword(currentUser.id, hashedNew);
+                alert("Senha alterada com sucesso.");
+                document.getElementById("change-password-form").reset();
+            });
+
+            document.getElementById("cancel-add-product").addEventListener("click", () => {
+                showAdminProducts();
+            });
+
+            document.getElementById("cancel-change-password").addEventListener("click", () => {
+                showAdminProducts();
+            });
+
+            document.getElementById("new-password").addEventListener("input", (e) => {
+                checkPasswordStrength(e.target.value);
+            });
+
+            document.getElementById("confirm-password").addEventListener("input", (e) => {
+                const pass = document.getElementById("new-password").value;
+                if (pass !== e.target.value) {
+                    document.getElementById("password-mismatch").classList.remove("hidden");
+                } else {
+                    document.getElementById("password-mismatch").classList.add("hidden");
+                }
+            });
+
+            init();
+        });
+
+        // Inicialização
+        async function init() {
+            await loadDatabase();
+            showShopPage();
         }
 
         function logout() {
             isAuthenticated = false;
             currentUser = null;
-            adminLink.classList.add('hidden');
+            document.getElementById("admin-link").classList.add("hidden");
             showShopPage();
         }
 
-        function renderProducts(categoryId = null) {
-            const productsContainer = shopPage.querySelector('.grid');
-            productsContainer.innerHTML = '';
-            const products = getProducts(categoryId);
-            const categories = getCategories().reduce((acc, c) => {
-                acc[c.id] = c.name;
-                return acc;
-            }, {});
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card bg-dark-700 rounded-xl shadow-md overflow-hidden transition duration-300 border border-gold-500';
-                productCard.innerHTML = `
-                    <div class="h-48 overflow-hidden">
-                        <img src="${product.image_url}" alt="${product.name}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold gold-text mb-2">${product.name}</h3>
-                        <p class="text-gray-300 mb-2">${categories[product.category_id] || 'Sem Categoria'}</p>
-                        <p class="text-gray-300 mb-4">${product.description}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold gold-text">R$ ${product.price.toFixed(2)}</span>
-                            <a href="${product.purchase_link}" target="_blank" class="px-4 py-2 gold-bg text-dark-900 rounded-lg hover:bg-gold-600 transition duration-300">
-                                Comprar Agora
-                            </a>
-                        </div>
-                    </div>
-                `;
-                productsContainer.appendChild(productCard);
-            });
-        }
-
-        function renderAdminProducts() {
-            const productsList = document.getElementById('admin-products-list');
-            productsList.innerHTML = '';
-            const products = getProducts();
-            const categories = getCategories().reduce((acc, c) => {
-                acc[c.id] = c.name;
-                return acc;
-            }, {});
-            products.forEach(product => {
-                const row = document.createElement('tr');
-                row.className = 'table-row';
-                row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="${product.image_url}" alt="${product.name}">
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-white">${product.name}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm gold-text">R$ ${product.price.toFixed(2)}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-300">${categories[product.category_id] || 'Sem Categoria'}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-300 truncate max-w-xs">${product.purchase_link}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                        <button onclick="editProduct(${product.id})" class="gold-text hover:text-gold-600 mr-3">Editar</button>
-                        <button onclick="deleteProduct(${product.id})" class="text-red-400 hover:text-red-600">Excluir</button>
-                    </td>
-                `;
-                productsList.appendChild(row);
-            });
-        }
-
-        function loadCategoriesToForm() {
-            const select = document.getElementById('product-category');
-            select.innerHTML = '<option value="">Selecione uma categoria</option>';
-            const categories = getCategories();
-            categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat.id;
-                option.textContent = cat.name;
-                select.appendChild(option);
-            });
-        }
-
-        function loadCategoriesToFilter() {
-            const select = document.getElementById('category-filter');
-            select.innerHTML = '<option value="">Todas as Categorias</option>';
-            const categories = getCategories();
-            categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat.id;
-                option.textContent = cat.name;
-                select.appendChild(option);
-            });
-        }
-
-        function addNewProductToDB() {
-            const newProduct = {
-                name: document.getElementById('product-name').value,
-                price: parseFloat(document.getElementById('product-price').value),
-                description: document.getElementById('product-description').value,
-                image_url: document.getElementById('product-image').value,
-                purchase_link: document.getElementById('product-link').value,
-                category_id: document.getElementById('product-category').value || null
-            };
-            addProduct(newProduct);
-            showAdminProducts();
-            alert('Produto adicionado com sucesso!');
-        }
-
-        function updateProductInDB(id) {
-            const updatedProduct = {
-                id: parseInt(id),
-                name: document.getElementById('product-name').value,
-                price: parseFloat(document.getElementById('product-price').value),
-                description: document.getElementById('product-description').value,
-                image_url: document.getElementById('product-image').value,
-                purchase_link: document.getElementById('product-link').value,
-                category_id: document.getElementById('product-category').value || null
-            };
-            updateProduct(updatedProduct);
-            showAdminProducts();
-            alert('Produto atualizado com sucesso!');
-        }
-
-        window.editProduct = function(id) {
+        function editProduct(id) {
             const product = getProductById(id);
             if (product) {
-                showEditProductForm(product);
+                showAddProductForm(product);
             }
-        };
-
-        window.deleteProduct = function(id) {
-            if (confirm('Tem certeza que deseja excluir este produto?')) {
-                deleteProductById(id);
-                renderAdminProducts();
-                renderProducts();
-                alert('Produto excluído com sucesso!');
-            }
-        };
-
-        function checkPasswordStrength(password) {
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.length >= 12) strength++;
-            if (/[A-Z]/.test(password)) strength++;
-            if (/[a-z]/.test(password)) strength++;
-            if (/[0-9]/.test(password)) strength++;
-            if (/[^A-Za-z0-9]/.test(password)) strength++;
-            strength = Math.min(strength, 4);
-            passwordStrength.className = `password-strength strength-${strength}`;
-        }
-
-        function changePasswordInDB() {
-            const currentPassword = document.getElementById('current-password').value;
-            const newPassword = document.getElementById('new-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            passwordChangeSuccess.classList.add('hidden');
-            passwordChangeError.classList.add('hidden');
-            if (!currentPassword || !newPassword || !confirmPassword) {
-                showPasswordError('Todos os campos são obrigatórios.');
-                return;
-            }
-            const hashedCurrentPassword = sha256(currentPassword);
-            if (hashedCurrentPassword !== currentUser.password_hash) {
-                showPasswordError('A senha atual está incorreta.');
-                return;
-            }
-            if (newPassword.length < 8) {
-                showPasswordError('A nova senha deve ter pelo menos 8 caracteres.');
-                return;
-            }
-            if (newPassword !== confirmPassword) {
-                showPasswordError('As senhas não coincidem.');
-                return;
-            }
-            const hashedNewPassword = sha256(newPassword);
-            updateUserPassword(currentUser.id, hashedNewPassword);
-            currentUser.password_hash = hashedNewPassword;
-            passwordChangeSuccess.classList.remove('hidden');
-            changePasswordForm.reset();
-            passwordStrength.className = 'password-strength strength-0';
-        }
-
-        function showPasswordError(message) {
-            errorMessage.textContent = message;
-            passwordChangeError.classList.remove('hidden');
         }
 
         function checkPasswordStrength(password) {
@@ -866,10 +539,8 @@
             if (/[0-9]/.test(password)) strength++;
             if (/[^A-Za-z0-9]/.test(password)) strength++;
             strength = Math.min(strength, 4);
-            passwordStrength.className = `password-strength strength-${strength}`;
+            document.getElementById("password-strength").className = `password-strength strength-${strength}`;
         }
-
-        init();
     </script>
 </body>
 </html>
