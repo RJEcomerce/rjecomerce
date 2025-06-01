@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Product } from '../types/supabase';
 import { AspectRatio } from './ui/aspect-ratio';
 import { useIsMobile } from '../hooks/use-mobile';
-import { trackProductView } from '../hooks/useAnalytics';
 
 interface ProductCardProps {
   product: Product;
@@ -17,21 +16,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
 
-  const handleProductClick = () => {
-    // Rastrear visualização do produto
-    trackProductView(product.id);
-  };
-
-  const handlePurchaseClick = () => {
-    // Rastrear clique no botão de compra
-    trackProductView(product.id);
-  };
-
   return (
-    <div 
-      className="product-card bg-dark-700 rounded-xl shadow-md overflow-hidden transition duration-300 border border-gold-500 cursor-pointer"
-      onClick={handleProductClick}
-    >
+    <div className="product-card bg-dark-700 rounded-xl shadow-md overflow-hidden transition duration-300 border border-gold-500">
       <AspectRatio ratio={1} className="overflow-hidden">
         {product.image_url ? (
           <img 
@@ -93,10 +79,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               href={product.purchase_link} 
               target="_blank" 
               rel="noopener noreferrer"
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePurchaseClick();
-              }}
               className={`gold-bg text-dark-900 rounded-lg hover:bg-gold-600 transition duration-300 text-center ${
                 isMobile ? 'px-2 py-1 text-xs mt-1' : 'px-4 py-2'
               }`}

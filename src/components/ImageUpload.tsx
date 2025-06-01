@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { supabase } from '../integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
-import ImageGallery from './ImageGallery';
 
 interface ImageUploadProps {
   onImageUploaded: (url: string) => void;
@@ -17,7 +16,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   onImageRemoved 
 }) => {
   const [uploading, setUploading] = useState(false);
-  const [showGallery, setShowGallery] = useState(false);
   const { toast } = useToast();
 
   const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,15 +71,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     }
   };
 
-  const handleImageSelected = (url: string) => {
-    onImageUploaded(url);
-    setShowGallery(false);
-    toast({
-      title: "Imagem selecionada",
-      description: "Imagem selecionada com sucesso!",
-    });
-  };
-
   return (
     <div className="space-y-4">
       {currentImage ? (
@@ -105,39 +94,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         </div>
       )}
       
-      <div className="flex gap-2">
-        <label className="block">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={uploadImage}
-            disabled={uploading}
-            className="hidden"
-          />
-          <div className="flex items-center justify-center px-4 py-2 border border-gold-500 rounded-lg cursor-pointer hover:bg-dark-600 transition-colors">
-            <Upload size={16} className="mr-2" />
-            {uploading ? 'Enviando...' : 'Nova Imagem'}
-          </div>
-        </label>
-        
-        <button
-          type="button"
-          onClick={() => setShowGallery(!showGallery)}
-          className="flex items-center justify-center px-4 py-2 border border-gold-500 rounded-lg hover:bg-dark-600 transition-colors"
-        >
-          <ImageIcon size={16} className="mr-2" />
-          {showGallery ? 'Ocultar Galeria' : 'Galeria'}
-        </button>
-      </div>
-
-      {showGallery && (
-        <div className="border border-gold-500 rounded-lg p-4 bg-dark-800">
-          <ImageGallery
-            onImageSelected={handleImageSelected}
-            selectedImage={currentImage}
-          />
+      <label className="block">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={uploadImage}
+          disabled={uploading}
+          className="hidden"
+        />
+        <div className="flex items-center justify-center px-4 py-2 border border-gold-500 rounded-lg cursor-pointer hover:bg-dark-600 transition-colors">
+          <Upload size={16} className="mr-2" />
+          {uploading ? 'Enviando...' : 'Escolher Imagem'}
         </div>
-      )}
+      </label>
     </div>
   );
 };
